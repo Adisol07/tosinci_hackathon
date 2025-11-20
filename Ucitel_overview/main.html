@@ -16,18 +16,34 @@
   </header>
 
   <div class="container">
-    <div class="class-selector">
-      <label for="classDropdown">Vyberte třídu:</label>
-      <select id="classDropdown">
-        <option value="E4">E4</option>
-        <option value="C4">C4</option>
-      </select>
+
+    <!-- NOVÝ OBAL -->
+    <div class="top-bar">
+
+      <div class="selectors">
+        <div class="class-selector">
+          <label for="classDropdown">Vyberte třídu:</label>
+          <select id="classDropdown">
+            <option value="E4">E4</option>
+            <option value="C4">C4</option>
+          </select>
+        </div>
+
+        <div class="subject-selector">
+          <label for="subjectDropdown">Vyberte předmět:</label>
+          <select id="subjectDropdown">
+            <option value="matematika">Matematika</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="class-info-inline">
+        <h2>Průměr třídy: <span id="classAverage">--</span></h2>
+      </div>
+
     </div>
 
-    <div class="class-info">
-      <h2>Průměr třídy: <span id="classAverage">--</span></h2>
-      <button id="addStudentBtn" class="button-practice">Přidat studenta</button>
-    </div>
+    <button id="addStudentBtn" class="button-practice">Přidat studenta</button>
 
     <table class="students-table">
       <thead>
@@ -38,11 +54,103 @@
         </tr>
       </thead>
       <tbody id="studentsList">
-        <!-- JS doplní studenty -->
       </tbody>
     </table>
+
   </div>
 
-  <script src="main.js"></script>
+<script>
+const classes = {
+  E4: { students: [], average: 0 },
+  C4: { students: [], average: 0 }
+};
+
+// GENERACE STUDENTŮ
+for (const className of ["E4", "C4"]) {
+  const students = [];
+  for (let i = 1; i <= 10; i++) {
+    const grades = [];
+    for (let j = 1; j <= 10; j++) {
+      grades.push(Math.floor(Math.random() * 51) + 50);
+    }
+    students.push({
+      name: `Student${String(i).padStart(2, "0")}`,
+      grades: grades,
+      gradeNames: Array.from({ length: 10 }, (_, k) => `Úkol ${k + 1}`)
+    });
+  }
+  classes[className].students = students;
+  const allGrades = students.flatMap(s => s.grades);
+  classes[className].average = Math.round(
+    allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
+  );
+}
+
+const classDropdown = document.getElementById("classDropdown");
+const studentsList = document.getElementById("studentsList");
+const classAverage = document.getElementById("classAverage");
+const addStudentBtn = document.getElementById("addStudentBtn");
+
+function updateClassView(className) {
+  const cls = classes[className];
+  classAverage.textContent = cls.average + "%";
+  studentsList.innerHTML = "";
+
+  cls.students.forEach(student => {
+    const tr = document.createElement("tr");
+
+    const nameTd = document.createElement("td");
+    nameTd.className = "student-name-cell";
+    nameTd.textContent = student.name;
+    tr.appendChild(nameTd);
+
+    student.grades.forEach((g, idx) => {
+      const td = document.createElement("td");
+      td.className = "grade-cell";
+
+      const span = document.createElement("span");
+      span.className = "grade";
+      span.textContent = g;
+
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = student.gradeNames[idx];
+
+      td.appendChild(span);
+      td.appendChild(tooltip);
+      tr.appendChild(td);
+    });
+
+    const actionTd = document.createElement("td");
+
+    const btnPractice = document.createElement("button");
+    btnPractice.className = "button-practice";
+    btnPractice.textContent = "Procvičit";
+
+    const btnReset = document.createElement("button");
+    btnReset.className = "button-reset";
+    btnReset.textContent = "Resetovat heslo";
+
+    const btnDelete = document.createElement("button");
+    btnDelete.className = "button-delete";
+    btnDelete.textContent = "Vymazat účet";
+
+    actionTd.appendChild(btnPractice);
+    actionTd.appendChild(btnReset);
+    actionTd.appendChild(btnDelete);
+
+    tr.appendChild(actionTd);
+    studentsList.appendChild(tr);
+  });
+}
+
+updateClassView(classDropdown.value);
+classDropdown.addEventListener("change", (e) => updateClassView(e.target.value));
+
+addStudentBtn.addEventListener("click", () => {
+  console.log("Přidat studenta - zatím nic nedělá");
+});
+</script>
+
 </body>
 </html>

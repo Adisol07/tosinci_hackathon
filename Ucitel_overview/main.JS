@@ -3,7 +3,7 @@ const classes = {
   C4: { students: [], average: 0 }
 };
 
-// Vygeneruj 10 studentů na každou třídu s 10 známkami a názvy testů
+// Generování studentů
 for (const className of ["E4", "C4"]) {
   const students = [];
   for (let i = 1; i <= 10; i++) {
@@ -18,8 +18,11 @@ for (const className of ["E4", "C4"]) {
     });
   }
   classes[className].students = students;
+
   const allGrades = students.flatMap(s => s.grades);
-  classes[className].average = Math.round(allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length);
+  classes[className].average = Math.round(
+    allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
+  );
 }
 
 const classDropdown = document.getElementById("classDropdown");
@@ -57,30 +60,34 @@ function updateClassView(className) {
       tr.appendChild(td);
     });
 
-    // Akce
     const actionTd = document.createElement("td");
 
     const btnPractice = document.createElement("button");
     btnPractice.className = "button-practice";
     btnPractice.textContent = "Procvičit";
-    btnPractice.addEventListener("click", () => console.log("Procvičit", student.name));
+    btnPractice.addEventListener("click", () =>
+      console.log("Procvičit", student.name)
+    );
 
     const btnReset = document.createElement("button");
     btnReset.className = "button-reset";
     btnReset.textContent = "Resetovat heslo";
-    btnReset.addEventListener("click", () => console.log("Resetovat heslo", student.name));
+    btnReset.addEventListener("click", () =>
+      console.log("Resetovat heslo", student.name)
+    );
 
     const btnDelete = document.createElement("button");
     btnDelete.className = "button-delete";
     btnDelete.textContent = "Vymazat účet";
-    btnDelete.addEventListener("click", () => console.log("Vymazat účet", student.name));
+    btnDelete.addEventListener("click", () =>
+      console.log("Vymazat účet", student.name)
+    );
 
     actionTd.appendChild(btnPractice);
     actionTd.appendChild(btnReset);
     actionTd.appendChild(btnDelete);
 
     tr.appendChild(actionTd);
-
     studentsList.appendChild(tr);
   });
 }
@@ -89,5 +96,5 @@ updateClassView(classDropdown.value);
 classDropdown.addEventListener("change", (e) => updateClassView(e.target.value));
 
 addStudentBtn.addEventListener("click", () => {
-  console.log("Přidat studenta - zatím nic nedělá");
+  console.log("Přidat studenta – funkce zatím není implementována.");
 });
