@@ -29,7 +29,9 @@ let currentIndex = 0;
             max-width: 90%; width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
-        #customModal p { margin:0 0 1rem 0; white-space: pre-wrap; }
+        #customModal p { margin:0 0 1rem 0; white-space: pre-wrap; text-align:left; }
+        /* utility class to center success text */
+        #customModal .centerText { text-align: center; font-size:18px; font-weight:700; }
         #customModal .okBtn {
             display:inline-block; padding:0.45rem 0.8rem; border-radius:6px;
             background:#0b79ff; color:#fff; border:none; cursor:pointer;
@@ -40,7 +42,9 @@ let currentIndex = 0;
     style.textContent = css;
     document.head.appendChild(style);
 
-    function showDialog(message) {
+    // showDialog(message, options)
+    // options: { centerText: boolean, autoCloseMs: number }
+    function showDialog(message, options = {}) {
         return new Promise(resolve => {
             const overlay = document.createElement('div');
             overlay.id = 'customModalOverlay';
@@ -53,17 +57,37 @@ let currentIndex = 0;
                 </div>
             `;
             document.body.appendChild(overlay);
-            overlay.querySelector('#customModalMessage').textContent = String(message);
+            const msgEl = overlay.querySelector('#customModalMessage');
+            msgEl.textContent = String(message);
+
+            // Apply centering class when requested (CSS controls appearance)
+            if (options.centerText) {
+                msgEl.classList.add('centerText');
+            }
+
             const ok = overlay.querySelector('.okBtn');
+
             function close(result = true) {
                 ok.removeEventListener('click', onOk);
-                document.body.removeChild(overlay);
+                if (overlay.parentNode) document.body.removeChild(overlay);
                 resolve(result);
             }
             function onOk() { close(true); }
+
+            // OK button visible immediately. If autoCloseMs is provided, auto-close after that time.
+            if (typeof options.autoCloseMs === 'number' && options.autoCloseMs > 0) {
+                // ensure focus is on the overlay, but keep OK visible
+                ok.focus();
+                const autoTimer = setTimeout(() => {
+                    clearTimeout(autoTimer);
+                    close(true);
+                }, options.autoCloseMs);
+            } else {
+                ok.focus();
+            }
+
             ok.addEventListener('click', onOk);
             overlay.addEventListener('click', (e) => { if (e.target === overlay) close(true); });
-            ok.focus();
         });
     }
 
@@ -124,10 +148,12 @@ function checkAnswer() {
 
     const correct = questions[currentIndex].correct;
     const feedback = (selected.value === correct)
-        ? (questions[currentIndex].correctText || 'Správně! 🎉')
-        : (questions[currentIndex].incorrectText || 'Špatně. Správná odpověď: ') + correct;
+            ? (questions[currentIndex].correctText || 'Správně! 🎉')
+            : (questions[currentIndex].incorrectText || 'Špatně. Správná odpověď: ') + correct;
 
-    showCustomDialog(feedback).then(() => {
+        // When correct, show centered 'Skvěle' and auto-close after 2s (OK visible immediately)
+        const dialogOptions = (selected.value === correct) ? { centerText: true, autoCloseMs: 2000 } : {};
+        showCustomDialog(feedback, dialogOptions).then(() => {
         currentIndex++;
         if (currentIndex >= questions.length) {
             showCompletionScreen();
