@@ -18,5 +18,6 @@ include_once(__DIR__ . '/functions.php');
 
 <body>
     <header>
+        <a href="<?php echo URL; ?>"><?php echo NAME; ?></a>
     </header>
     <main>

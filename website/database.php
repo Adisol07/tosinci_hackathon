@@ -14,12 +14,12 @@ function create_db()
     return $mysqli;
 }
 
-function test()
+function get_user($username)
 {
     $db = create_db();
-    $result = $db->query("SELECT * FROM users WHERE id = '1'");
+    $result = $db->query("SELECT * FROM users WHERE username = '$username'");
     while ($row = $result->fetch_assoc()) {
-        $user = $row["username"];
+        $user = $row;
     }
     $result->free();
     $db->close();

@@ -1,12 +1,14 @@
-header {
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 1rem;
-
-    a {
-        font-size: 3rem;
-        font-weight: 900;
-    }
+    background-color: red;
 }
