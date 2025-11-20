@@ -1,117 +1,129 @@
-/* Body and container */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #EDE6DB;
-    color: #111;
-    margin: 0;
-    padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #EDE6DB;
+  color: #111;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 32px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 header .teacher-profile {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #0f172a;
 }
 
 header .teacher-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
-/* Titles */
-h1 {
-    text-align: center;
-    margin-bottom: 24px;
-    color: #0f172a;
-}
-
-/* Class selector */
 .class-selector {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .class-selector label {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .class-selector select {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-/* Class info */
 .class-info {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-/* Students list */
-.students ul {
-    list-style: none;
-    padding: 0;
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.students li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(59,130,246,0.06);
-    margin-bottom: 10px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    transition: transform 0.1s, box-shadow 0.2s;
+.students-table th, .students-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
 }
 
-.students li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+.students-table th {
+  background-color: rgba(59,130,246,0.1);
+  font-weight: 600;
 }
 
-/* Student name and grades */
-.student-name {
-    font-weight: 600;
-    margin-right: 16px;
-    flex: 1;
+.student-name-cell {
+  text-align: left;
+  font-weight: 600;
 }
 
-.grades {
-    display: flex;
-    gap: 6px;
+.grade-cell {
+  position: relative;
 }
 
-.grade {
-    background: #3b82f6;
-    color: #fff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
-    min-width: 28px;
-    text-align: center;
+.grade-cell .tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.grade-cell:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.grade-cell span.grade {
+  display: inline-block;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: #3b82f6;
+  color: white;
+  cursor: default;
+}
+
+.button-practice {
+  padding: 6px 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

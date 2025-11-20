@@ -1,69 +1,87 @@
-// Sample class data with 10 grades each student
 const classes = {
-    E4: {
-        students: [
-            { name: "Student01", grades: [80, 90, 85, 70, 95, 88, 76, 92, 85, 90] },
-            { name: "Student02", grades: [70, 75, 80, 65, 90, 78, 82, 84, 76, 80] }
-        ]
-    },
-    C4: {
-        students: [
-            { name: "Student03", grades: [85, 88, 92, 80, 90, 85, 87, 90, 92, 88] },
-            { name: "Student04", grades: [60, 70, 65, 55, 75, 68, 72, 70, 66, 64] }
-        ]
-    }
+  E4: { students: [], average: 0 },
+  C4: { students: [], average: 0 }
 };
 
-// DOM elements
-const classDropdown = document.getElementById('classDropdown');
-const studentsList = document.getElementById('studentsList');
-const classAverage = document.getElementById('classAverage');
-
-// Compute class average
-function computeClassAverage(students) {
-    const totalGrades = students.flatMap(s => s.grades);
-    const avg = totalGrades.reduce((sum, g) => sum + g, 0) / totalGrades.length;
-    return Math.round(avg);
-}
-
-// Populate students list
-function updateClassView(className) {
-    const cls = classes[className];
-
-    // Update class average
-    classAverage.textContent = computeClassAverage(cls.students) + "%";
-
-    // Clear previous list
-    studentsList.innerHTML = '';
-
-    // Add students
-    cls.students.forEach(student => {
-        const li = document.createElement('li');
-
-        const nameDiv = document.createElement('div');
-        nameDiv.className = 'student-name';
-        nameDiv.textContent = student.name;
-
-        const gradesDiv = document.createElement('div');
-        gradesDiv.className = 'grades';
-        student.grades.forEach(g => {
-            const gSpan = document.createElement('span');
-            gSpan.className = 'grade';
-            gSpan.textContent = g;
-            gradesDiv.appendChild(gSpan);
-        });
-
-        li.appendChild(nameDiv);
-        li.appendChild(gradesDiv);
-        studentsList.appendChild(li);
+// Vygeneruj 10 studentů na každou třídu s 10 známkami a názvy testů
+for (const className of ["E4", "C4"]) {
+  const students = [];
+  for (let i = 1; i <= 10; i++) {
+    const grades = [];
+    for (let j = 1; j <= 10; j++) {
+      // náhodná známka 50–100
+      grades.push(Math.floor(Math.random() * 51) + 50);
+    }
+    students.push({
+      name: `Student${String(i).padStart(2, "0")}`,
+      grades: grades,
+      gradeNames: Array.from({ length: 10 }, (_, k) => `Úkol ${k + 1}`) // pojmenujeme testy "Úkol 1, Úkol 2, …"
     });
+  }
+  classes[className].students = students;
+
+  // spočítat průměr třídy
+  const allGrades = students.flatMap(s => s.grades);
+  const avg = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length;
+  classes[className].average = Math.round(avg);
 }
 
-// Initial load
+const classDropdown = document.getElementById("classDropdown");
+const studentsList = document.getElementById("studentsList");
+const classAverage = document.getElementById("classAverage");
+
+function updateClassView(className) {
+  const cls = classes[className];
+  classAverage.textContent = cls.average + "%";
+
+  studentsList.innerHTML = "";
+
+  cls.students.forEach(student => {
+    const tr = document.createElement("tr");
+
+    // jméno studenta
+    const nameTd = document.createElement("td");
+    nameTd.className = "student-name-cell";
+    nameTd.textContent = student.name;
+    tr.appendChild(nameTd);
+
+    // známky
+    student.grades.forEach((g, idx) => {
+      const td = document.createElement("td");
+      td.className = "grade-cell";
+
+      const span = document.createElement("span");
+      span.className = "grade";
+      span.textContent = g;
+
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = student.gradeNames[idx];
+
+      td.appendChild(span);
+      td.appendChild(tooltip);
+      tr.appendChild(td);
+    });
+
+    // tlačítko procvičit
+    const btnTd = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.className = "button-practice";
+    btn.textContent = "Procvičit";
+    // momentálně nedělá nic
+    btn.addEventListener("click", () => {
+      console.log("Procvičit pro", student.name);
+    });
+    btnTd.appendChild(btn);
+    tr.appendChild(btnTd);
+
+    studentsList.appendChild(tr);
+  });
+}
+
+// počáteční vykreslení
 updateClassView(classDropdown.value);
 
-// Dropdown change listener
-classDropdown.addEventListener('change', (e) => {
-    updateClassView(e.target.value);
+classDropdown.addEventListener("change", (e) => {
+  updateClassView(e.target.value);
 });
-
