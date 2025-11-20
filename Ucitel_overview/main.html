@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Overview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Přehled žáků</div>
+        <div class="teacher-profile">
+            <img src="blank PFP.svg" alt="Teacher profile picture">
+            <span>Teacher1</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Class selection -->
+        <div class="class-selector">
+            <label for="classDropdown">Vyberte třídu:</label>
+            <select id="classDropdown">
+                <option value="E4">E4</option>
+                <option value="C4">C4</option>
+            </select>
+        </div>
+
+        <!-- Class info -->
+        <div class="class-info">
+            <h2>Průměr třídy: <span id="classAverage">--</span></h2>
+        </div>
+
+        <!-- Students list -->
+        <div class="students">
+            <ul id="studentsList">
+                <!-- JS will populate students here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
