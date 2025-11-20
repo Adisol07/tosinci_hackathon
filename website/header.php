@@ -1,5 +1,7 @@
 <?php
-include_once('config.php');
+include_once(__DIR__ . '/config.php');
+include_once(__DIR__ . '/database.php');
+include_once(__DIR__ . '/functions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
