@@ -1,3 +1,4 @@
+/* Stávající styly zůstávají */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #EDE6DB;
@@ -122,6 +123,35 @@ header .teacher-profile img {
 .button-practice {
   padding: 6px 12px;
   background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button-practice {
+  padding: 6px 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.button-reset {
+  padding: 6px 12px;
+  background: #f59e0b; /* oranžová */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.button-delete {
+  padding: 6px 12px;
+  background: #ef4444; /* červená */
   color: white;
   border: none;
   border-radius: 6px;
