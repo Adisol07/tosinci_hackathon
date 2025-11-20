@@ -47,6 +47,7 @@ $mark_count = get_mark_count($user['id']);
 
 <script>
     const percentage = <?php echo $user['score']; ?>;
+
     document.getElementById('overview-result').style.setProperty('--percentage', percentage);
 </script>
 
