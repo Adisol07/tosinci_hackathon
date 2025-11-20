@@ -144,6 +144,69 @@ main {
     }
 }
 
+.improve {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+
+    .improve-list {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+
+        .improve-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+
+            .improve-item-value {
+                position: relative;
+                transition: --percentage 1s ease-in-out;
+                --percentage: 10;
+                background: conic-gradient(var(--secondary-color) 0deg,
+                        var(--secondary-color) calc(var(--percentage) * 3.6deg),
+                        var(--primary-color) calc(var(--percentage) * 3.6deg));
+                border-radius: 50%;
+                width: 6rem;
+                aspect-ratio: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                h2 {
+                    font-size: 1.25rem;
+                    font-weight: 800;
+                    z-index: 1;
+                }
+            }
+
+            .improve-item-value::before {
+                content: "";
+                position: absolute;
+                width: calc(100% - 2rem);
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background: var(--primary-background);
+            }
+
+            h3 {
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     #overview-result {
         transition: none;
