@@ -1,0 +1,79 @@
+{
+  "_comment": "Příklad dat získaných z Bakalářů pomocí api, pokud je předmět hodnocen pomocí systému známkování 1-5.",
+    
+
+  "Subjects":[
+    {
+      "Marks":[
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T08:33:00+01:00",
+          "Caption":"Trigonometrické funkce",
+          "Theme":"",
+          "MarkText":"3",
+          "TeacherId":"UZBNM",
+          "Type":"O",
+          "TypeNote":"písemná práce",
+          "Weight":5,
+          "SubjectId":"28",
+          "IsNew":false,
+          "IsPoints":false,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BNMPSLI70(",
+          "PointsText":"",
+          "MaxPoints":0
+        },
+        { 
+          "MarkDate":"2020-02-13T00:00:00+01:00",
+          "EditDate":"2020-02-20T07:36:00+01:00",
+          "Caption":"Logaritmické funkce",
+          "Theme":"",
+          "MarkText":"3-",
+          "TeacherId":"UZBNM",
+          "Type":"W",
+          "TypeNote":"písemka střední",
+          "Weight":3,
+          "SubjectId":"28",
+          "IsNew":false,
+          "IsPoints":false,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BNMVP:T:1N",
+          "PointsText":"",
+          "MaxPoints":0
+        },
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T07:36:00+01:00",
+          "Caption":"Ronice s proměnnou v exponentu",
+          "Theme":"",
+          "MarkText":"2",
+          "TeacherId":"UZBNM",
+          "Type":"W",
+          "TypeNote":"písemka střední",
+          "Weight":3,
+          "SubjectId":"28",
+          "IsNew":false,
+          "IsPoints":false,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BNMVP:T:1O",
+          "PointsText":"",
+          "MaxPoints":0
+        }
+      ],
+      "Subject":{
+        "Id":"28",
+        "Abbrev":"MAT ",
+        "Name":"Matematika a její aplikace"
+      },
+      "AverageText":"2,86 ",
+      "TemporaryMark":"",
+      "SubjectNote":"",
+      "TemporaryMarkNote":"",
+      "PointsOnly":false,
+      "MarkPredictionEnabled":true
+    }
+    ]
+}

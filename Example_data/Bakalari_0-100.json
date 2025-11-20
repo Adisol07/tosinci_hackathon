@@ -1,0 +1,96 @@
+{
+  "_comment": "Příklad dat získaných z Bakalářů pomocí api, pokud je předmět hodnocen pomocí systému známkování 1-100.",
+  "Subjects": [
+    {
+      "Marks":[
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T13:13:00+01:00",
+          "Caption":"1. Statistika",
+          "Theme":"",
+          "MarkText":"82",
+          "TeacherId":"USBOY",
+          "Type":"Z",
+          "TypeNote":"zkoušení písemné",
+          "Weight":null,
+          "SubjectId":"10",
+          "IsNew":false,
+          "IsPoints":true,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BOYV.N}FF4",
+          "PointsText":"",
+          "MaxPoints":100
+        },
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T18:14:00+01:00",
+          "Caption":"2. Analyt.g. 1",
+          "Theme":"",
+          "MarkText":"76",
+          "TeacherId":"USBOY",
+          "Type":"Z",
+          "TypeNote":"zkoušení písemné",
+          "Weight":null,
+          "SubjectId":"10",
+          "IsNew":false,
+          "IsPoints":true,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BOYD[1O_=V",
+          "PointsText":"",
+          "MaxPoints":100
+        },
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T16:07:00+01:00",
+          "Caption":"3. Analyt. g. 2",
+          "Theme":"",
+          "MarkText":"100",
+          "TeacherId":"USBOY",
+          "Type":"Z",
+          "TypeNote":"zkoušení písemné",
+          "Weight":null,
+          "SubjectId":"10",
+          "IsNew":false,
+          "IsPoints":true,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BOYVG*|:2|",
+          "PointsText":"",
+          "MaxPoints":100
+        },
+        {
+          "MarkDate":"2025-11-20T00:00:00+01:00",
+          "EditDate":"2025-11-20T16:00:00+01:00",
+          "Caption":"4. Analyt. g.",
+          "Theme":"",
+          "MarkText":"83",
+          "TeacherId":"USBOY",
+          "Type":"Z",
+          "TypeNote":"zkoušení písemné",
+          "Weight":null,
+          "SubjectId":"10",
+          "IsNew":false,
+          "IsPoints":true,
+          "CalculatedMarkText":"",
+          "ClassRankText":null,
+          "Id":"BOYP9PG6KS",
+          "PointsText":"",
+          "MaxPoints":100
+        }
+      ],
+      "Subject":{
+        "Id":"10",
+        "Abbrev":"M   ",
+        "Name":"Matematika"
+      },
+      "AverageText":"0,85 ",
+      "TemporaryMark":"",
+      "SubjectNote":"",
+      "TemporaryMarkNote":"",
+      "PointsOnly":false,
+      "MarkPredictionEnabled":true
+    }
+  ]
+}
