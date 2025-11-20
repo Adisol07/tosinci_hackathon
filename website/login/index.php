@@ -1,9 +1,9 @@
 <?php include_once('../header.php'); ?>
 <?php
 session_start();
-$_SESSION['user'] = 'Debug';
+$_SESSION['user'] = 'Test';
 
-echo 'Debug user has been logged in';
+echo 'Test user has been logged in';
 ?>
 
 <?php include_once('../footer.php'); ?>

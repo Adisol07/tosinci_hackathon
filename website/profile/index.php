@@ -46,16 +46,31 @@ $score = calculate_score(get_marks($user['id'], 9999)) / calculate_max_score(get
     </div>
 </div>
 
-<div>
+<div class="improve">
     <h2>Zlepšete:</h2>
-    <div class="zlepsete-list">
+    <div class="improve-list">
+        <?php foreach (get_bad_subjects(get_marks($user['id'], 9999)) as $subject): ?>
+            <!-- TODO: Fix this -->
+            <a class="improve-item" href="<?php echo URL; ?>/subject?id=<?php echo htmlspecialchars($subject[0]); ?>" data-percentage="<?php echo round($subject[1] / $subject[2] * 100); ?>">
+                <div class="improve-item-value">
+                    <h2><?php echo round($subject[1] / $subject[2] * 100); ?> %</h2>
+                </div>
+                <h3><?php echo $subject[0]; ?></h3>
+            </a>
+        <?php endforeach; ?>
     </div>
 </div>
 
 <script>
     const percentage = Math.round(<?php echo $score; ?>);
-
     document.getElementById('overview-result').style.setProperty('--percentage', percentage);
+
+    const improveItems = document.querySelectorAll('.improve-item');
+    for (const item of improveItems) {
+        const value = item.querySelector('.improve-item-value');
+        const percentage = Math.round(item.getAttribute('data-percentage'));
+        value.style.setProperty('--percentage', percentage);
+    }
 </script>
 
 <?php include_once('../footer.php'); ?>

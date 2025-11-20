@@ -19,20 +19,41 @@ function calculate_max_score($mark_count)
     return $mark_count * 6;
 }
 
-function select_bad_marks($marks)
+function get_subjects($marks)
 {
-    $bad_marks = [];
+    $subjects = [];
     foreach ($marks as $mark) {
-        if (
-            $mark['mark'] == -2 ||
-            $mark['mark'] == 3 ||
-            $mark['mark'] == -3 ||
-            $mark['mark'] == 4 ||
-            $mark['mark'] == -4 ||
-            $mark['mark'] == 5
-        ) {
-            $bad_marks[] = $mark;
+        if (!in_array($mark['subject'], $subjects)) {
+            $subjects[] = $mark['subject'];
         }
     }
-    return $bad_marks;
+    return $subjects;
+}
+
+function get_subject_marks($subject, $marks)
+{
+    $subject_marks = [];
+    foreach ($marks as $mark) {
+        if ($mark['subject'] == $subject) {
+            $subject_marks[] = $mark;
+        }
+    }
+    return $subject_marks;
+}
+
+function get_bad_subjects($marks)
+{
+    $subjects = get_subjects($marks);
+
+    $bad_subjects = [];
+    foreach ($subjects as $subject) {
+        $value = calculate_score(get_subject_marks($subject, $marks));
+        $max_value = calculate_max_score(count(get_subject_marks($subject, $marks)));
+
+        if ($value / $max_value < 0.5) {
+            $bad_subjects[] = [$subject, $value, $max_value];
+        }
+    }
+
+    return $bad_subjects;
 }
