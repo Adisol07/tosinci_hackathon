@@ -13,8 +13,203 @@
     <h3>Úloha: Trigonomerické funkce - Středně pokročilý</h3>
     
     <button id="napovedaBtn">Napověda</button>
+    <p>Vypočítej X z rovnice:</p>
+    ️<p id="zadani">sin(2x)+3​cos(x)=0</p>
 
-    <p id="napovedaText">
+
+    <div class="choices" role="radiogroup" aria-label="Možnosti odpovědi">
+        <p>Vyber jednu možnost:</p>
+
+        <label class="option">
+            <input type="radio" name="answer" value="A" />
+            <span class="dot" aria-hidden="true"></span>
+            <span class="label-text">A) x = 15°</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="answer" value="B" />
+            <span class="dot" aria-hidden="true"></span>
+            <span class="label-text">B) x = 30°</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="answer" value="C" />
+            <span class="dot" aria-hidden="true"></span>
+            <span class="label-text">C) x = 45°</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="answer" value="D" />
+            <span class="dot" aria-hidden="true"></span>
+            <span class="label-text">D) x = 60°</span>
+        </label>
+
+        <button id="checkBtn" type="button">Zkontrolovat</button>
+
+        <script>
+            // simple question rotation + check; move to main.js if you prefer
+            const questions = [
+            {
+                zadani: 'sin(2x)+3 cos(x)=0',
+                options: ['A) x = 15°','B) x = 30°','C) x = 45°','D) x = 60°'],
+                correct: 'B'
+            },
+            {
+                "zadani": "Najděte x: cos(x)=1/2",
+                "options": ["A) x = 30°", "B) x = 45°", "C) x = 60°", "D) x = 90°"],
+                "correct": "A",
+                "correctText": "Správně! 🎉",
+                "incorrectText": "Špatně. Správná odpověď: ",
+                "useModal": true
+            }
+            ];
+            // create a custom modal to avoid the browser "This site says" alert title
+            (function () {
+                // inject minimal styles
+                const css = `
+                #customModalOverlay {
+                    position: fixed; inset: 0; background: rgba(0,0,0,0.45); display:flex;
+                    align-items:center; justify-content:center; z-index: 10000;
+                }
+                #customModal {
+                    background: #fff; color:#111; padding:1.25rem; border-radius:8px;
+                    max-width: 90%; width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+                    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+                }
+                #customModal p { margin:0 0 1rem 0; white-space: pre-wrap; }
+                #customModal .okBtn {
+                    display:inline-block; padding:0.45rem 0.8rem; border-radius:6px;
+                    background:#0b79ff; color:#fff; border:none; cursor:pointer;
+                    font-weight:600;
+                }
+                `;
+                const style = document.createElement('style');
+                style.textContent = css;
+                document.head.appendChild(style);
+
+                function showDialog(message) {
+                    return new Promise(resolve => {
+                        const overlay = document.createElement('div');
+                        overlay.id = 'customModalOverlay';
+                        overlay.innerHTML = `
+                            <div id="customModal" role="dialog" aria-modal="true">
+                                <p id="customModalMessage"></p>
+                                <div style="text-align:right;">
+                                    <button class="okBtn">OK</button>
+                                </div>
+                            </div>
+                        `;
+                        document.body.appendChild(overlay);
+                        overlay.querySelector('#customModalMessage').textContent = String(message);
+                        const ok = overlay.querySelector('.okBtn');
+                        function close(result = true) {
+                            ok.removeEventListener('click', onOk);
+                            document.body.removeChild(overlay);
+                            resolve(result);
+                        }
+                        function onOk() { close(true); }
+                        ok.addEventListener('click', onOk);
+                        // allow click on overlay to also close
+                        overlay.addEventListener('click', (e) => { if (e.target === overlay) close(true); });
+                        // focus for accessibility
+                        ok.focus();
+                    });
+                }
+
+                // replace window.alert globally (non-blocking; use custom handlers for flows that need await)
+                window.alert = function(msg) { showDialog(msg); };
+
+                // rebind the "Zkontrolovat" button to use the modal and preserve flow (runs after script finishes)
+                setTimeout(() => {
+                    const oldBtn = document.getElementById('checkBtn');
+                    if (!oldBtn) return;
+                    // remove other listeners by replacing with a clone
+                    const btn = oldBtn.cloneNode(true);
+                    oldBtn.parentNode.replaceChild(btn, oldBtn);
+
+                    btn.addEventListener('click', async () => {
+                        const selected = document.querySelector('input[name="answer"]:checked');
+                        if (!selected) {
+                            await showDialog('Vyberte prosím jednu možnost.');
+                            return;
+                        }
+                        const correct = questions[currentIndex].correct;
+                        if (selected.value === correct) {
+                            await showDialog(questions[currentIndex].correctText || 'Správně!');
+                        } else {
+                            const incText = questions[currentIndex].incorrectText || 'Špatně. Správná odpověď: ';
+                            await showDialog(incText + correct);
+                        }
+                        // advance to next question and clear selection
+                        currentIndex = (currentIndex + 1) % questions.length;
+                        updateQuestion(currentIndex);
+                        document.querySelectorAll('input[name="answer"]').forEach(r => r.checked = false);
+                    });
+                }, 0);
+
+                // expose showDialog for other scripts (e.g. main.js) to use programmatically
+                window.showCustomDialog = showDialog;
+            })();
+            let currentIndex = 0;
+
+            function updateQuestion(i) {
+            const q = questions[i];
+            document.getElementById('zadani').textContent = q.zadani;
+            const labels = document.querySelectorAll('.label-text');
+            labels.forEach((el, idx) => {
+                if (q.options[idx]) el.textContent = q.options[idx];
+                else el.textContent = '';
+            });
+            // optional progress update
+            const prog = document.getElementById('progress_num');
+            if (prog) prog.textContent = (i + 1) + '/' + questions.length;
+            }
+
+            function checkAnswer() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+            if (!selected) {
+                alert('Vyberte prosím jednu možnost.');
+                return;
+            }
+            const correct = questions[currentIndex].correct;
+            if (selected.value === correct) {
+                alert('Správně!');
+            } else {
+                alert('Špatně. Správná odpověď: ' + correct);
+            }
+            // advance to next question and clear selection
+            currentIndex = (currentIndex + 1) % questions.length;
+            updateQuestion(currentIndex);
+            document.querySelectorAll('input[name="answer"]').forEach(r => r.checked = false);
+            }
+
+            document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+
+            // initialize
+            updateQuestion(currentIndex);
+        </script>
+    </div>
+    <p id="napovedaText"></p>
+    <style>
+        body { position: relative; }
+
+        .choices {
+            position: absolute;
+            right: 20px;
+            top: 120px;
+            z-index: 999;
+            max-width: 320px;
+        }
+
+        /* Responsive fallback for small screens */
+        @media (max-width: 640px) {
+            .choices {
+                position: static;
+                margin-top: 1rem;
+                max-width: 100%;
+            }
+        }
+    </style>
     Použij známé hodnoty:<br>
     sin(45°) = √2/2<br>
     cos(30°) = √3/2<br>
@@ -24,3 +219,4 @@
     <script src="napoveda.js"></script>
 </body>
 </html>
+
