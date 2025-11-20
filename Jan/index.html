@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-    <!-- Minimal HTML framework -->
+    <link rel="stylesheet" href="styl.css">
+
+    <!-- Prozatimní příprava ukázkové úlohy -->
 </head>
 <body>
-    <h2>1/10</h2>
+    <h2 id="progress_num">1/10</h2>
+    <progress id="myProgress" value="30" max="100"></progress>
+
     <h1>Procvičování - Matematika </h1>
     <h3>Úloha: Trigonomerické funkce - Středně pokročilý</h3>
+    
+    <button id="napovedaBtn">Napověda</button>
 
+    <p id="napovedaText">
+    Použij známé hodnoty:<br>
+    sin(45°) = √2/2<br>
+    cos(30°) = √3/2<br>
+    tan(60°) = √3
+    </p>
 
-
+    <script src="napoveda.js"></script>
 </body>
 </html>

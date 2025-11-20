@@ -1,0 +1,34 @@
+#napovedaBtn {
+    position: relative;
+    left: 75%;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #f0f0f0;
+    color: #333;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+#napovedaBtn:hover {
+    background: #e4e4e4;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Click (active) effect */
+#napovedaBtn:active {
+    background: #dcdcdc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+#napovedaText {
+    position: relative;
+    left: 75%;
+    padding: 8px 14px;
+
+
+    display: none;
+    margin-top: 10px;
+}
