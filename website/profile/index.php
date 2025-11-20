@@ -9,6 +9,7 @@ $username = $_SESSION['user'];
 $user = get_user($username);
 $marks = get_marks($user['id'], 3);
 $mark_count = get_mark_count($user['id']);
+$score = calculate_score(get_marks($user['id'], 9999)) / calculate_max_score(get_mark_count($user['id'])) * 100;
 ?>
 
 <link rel="stylesheet" href="./profile.css">
@@ -27,7 +28,7 @@ $mark_count = get_mark_count($user['id']);
         <div class="overview-znamky-list">
             <?php foreach ($marks as $mark): ?>
                 <a class="overview-znamky-item" href="<?php echo URL; ?>/mark?id=<?php echo $mark['id']; ?>">
-                    <h2><?php echo ($mark['mark'] < 0 ? "" : "&nbsp;"); ?><?php echo $mark['mark']; ?></h2>
+                    <h2><?php echo strrev($mark['mark']); ?><?php echo ($mark['mark'] < 0 ? "" : "&nbsp;"); ?></h2>
                     <div>
                         <h3><?php echo $mark['subject']; ?></h3>
                         <h4><?php echo $mark['description']; ?></h4>
@@ -41,12 +42,18 @@ $mark_count = get_mark_count($user['id']);
     </div>
 
     <div id="overview-result">
-        <h2><?php echo $user['score']; ?> %</h2>
+        <h2><?php echo round($score); ?> %</h2>
+    </div>
+</div>
+
+<div>
+    <h2>Zlepšete:</h2>
+    <div class="zlepsete-list">
     </div>
 </div>
 
 <script>
-    const percentage = <?php echo $user['score']; ?>;
+    const percentage = Math.round(<?php echo $score; ?>);
 
     document.getElementById('overview-result').style.setProperty('--percentage', percentage);
 </script>
