@@ -25,3 +25,28 @@ function get_user($username)
     $db->close();
     return $user;
 }
+
+function get_marks($user_id, $topK)
+{
+    $db = create_db();
+    $result = $db->query("SELECT * FROM marks WHERE user_id = '$user_id' ORDER BY id DESC LIMIT $topK");
+    $marks = [];
+    while ($row = $result->fetch_assoc()) {
+        $marks[] = $row;
+    }
+    $result->free();
+    $db->close();
+    return $marks;
+}
+
+function get_mark_count($user_id)
+{
+    $db = create_db();
+    $result = $db->query("SELECT COUNT(*) AS total_count FROM marks WHERE user_id = '$user_id'");
+    while ($row = $result->fetch_assoc()) {
+        $total_count = $row['total_count'];
+    }
+    $result->free();
+    $db->close();
+    return $total_count;
+}

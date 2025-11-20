@@ -3,6 +3,10 @@
 :root {
     --primary-foreground: #000000;
     --primary-background: #DBECFC;
+    --primary-color: #6CE5E8;
+    --secondary-color: #40B8D5;
+    --ternary-color: #A6D1FA;
+    --quaternary-color: #14A4ED;
 }
 
 * {
@@ -20,4 +24,5 @@ body {
     font-family: 'Nunito Sans', sans-serif;
     background-color: var(--primary-background);
     color: var(--primary-foreground);
+    padding: 2rem;
 }
