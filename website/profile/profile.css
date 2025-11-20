@@ -1,3 +1,9 @@
+@property --percentage {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
 body {
     width: 100vw;
 }
@@ -57,7 +63,7 @@ main {
         }
 
         .show-more {
-            font-size: 1rem;
+            font-size: 1.25rem;
             color: var(--quaternary-color);
             font-weight: 600;
             width: 100%;
@@ -106,6 +112,7 @@ main {
     }
 
     #overview-result {
+        user-select: none;
         position: relative;
         height: 75%;
         display: flex;
@@ -114,6 +121,8 @@ main {
         aspect-ratio: 1;
         align-items: center;
         justify-content: center;
+        transition: --percentage 1s ease-in-out;
+        --percentage: 0;
         background: conic-gradient(var(--secondary-color) 0deg,
                 var(--secondary-color) calc(var(--percentage) * 3.6deg),
                 var(--primary-color) calc(var(--percentage) * 3.6deg));
@@ -132,5 +141,11 @@ main {
         aspect-ratio: 1;
         border-radius: 50%;
         background: var(--primary-background);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #overview-result {
+        transition: none;
     }
 }
