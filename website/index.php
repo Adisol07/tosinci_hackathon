@@ -1,5 +1,7 @@
 <?php include_once('header.php'); ?>
 
-New hello world
+<?php
+echo test();
+?>
 
 <?php include_once('footer.php'); ?>
