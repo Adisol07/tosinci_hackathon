@@ -106,7 +106,20 @@ function showCompletionScreen() {
     document.body.appendChild(finishedMessage);
 }
 
-
+// Handle restart / next-exercise buttons (delegated so they work after completion screen)
+document.addEventListener('click', (e) => {
+    const id = e.target && e.target.id;
+    if (id === 'restartBtn') {
+        currentIndex = 0;
+        // reload to restore the original UI and state
+        location.reload();
+    } else if (id === 'nextExerciseBtn') {
+        // Replace with real navigation when available
+        showCustomDialog('Přejít na další cvičení...').then(() => {
+            // e.g. window.location.href = '/next-exercise.html';
+        });
+    }
+});
 // --- Check answer ---
 function checkAnswer() {
     const selected = document.querySelector('input[name="answer"]:checked');
