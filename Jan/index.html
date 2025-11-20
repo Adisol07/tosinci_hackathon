@@ -1,103 +1,68 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procvičování - Matematika</title>
     <link rel="stylesheet" href="styl.css">
-
-    <!-- Prozatimní příprava ukázkové úlohy -->
 </head>
 <body>
-    
-    <h1>Procvičování - Matematika </h1>
-    <h3>Úloha: Trigonomerické funkce - Středně pokročilý</h3>
-    <h2 id="progress_num">1/10</h2>
-    <progress id="myProgress" value="30" max="100"></progress>
 
-    
-    <button id="napovedaBtn">Napověda</button>
-    <p>Vypočítej X z rovnice:</p>
-    ️<p id="zadani">sin(2x)+3​cos(x)=0</p>
+<div class="page">
 
+    <!-- Hlavní karta -->
+    <div class="card">
 
-    <div class="choices" role="radiogroup" aria-label="Možnosti odpovědi">
-        <p>Vyber jednu možnost:</p>
+        <!-- Hlavička -->
+        <div class="header-wrapper">
+            <div class="title-row">
+                <h1>Procvičování - Matematika</h1>
+                <h3>Úloha: Trigonometrické funkce - Středně pokročilý</h3>
+            </div>
 
-        <label class="option">
-            <input type="radio" name="answer" value="A" />
-            <span class="dot" aria-hidden="true"></span>
-            <span class="label-text">A) x = 15°</span>
-        </label>
+            <div class="progress-wrapper">
+                <span id="progress_num">1/2</span>
+                <progress id="myProgress" value="1" max="2"></progress>
+            </div>
+        </div>
 
-        <label class="option">
-            <input type="radio" name="answer" value="B" />
-            <span class="dot" aria-hidden="true"></span>
-            <span class="label-text">B) x = 30°</span>
-        </label>
+        <p class="intro">Vypočítej X z rovnice:</p>
+        <p id="zadani" class="equation">sin(2x) + 3 cos(x) = 0</p>
 
-        <label class="option">
-            <input type="radio" name="answer" value="C" />
-            <span class="dot" aria-hidden="true"></span>
-            <span class="label-text">C) x = 45°</span>
-        </label>
+        <div class="choices" role="radiogroup" aria-label="Možnosti odpovědi">
+            <p class="choice-title">Vyber jednu možnost:</p>
 
-        <label class="option">
-            <input type="radio" name="answer" value="D" />
-            <span class="dot" aria-hidden="true"></span>
-            <span class="label-text">D) x = 60°</span>
-        </label>
+            <label class="option">
+                <input type="radio" name="answer" value="A" />
+                <span class="dot"></span>
+                <span class="label-text">A) x = 15°</span>
+            </label>
 
-        <button id="checkBtn" type="button">Zkontrolovat</button>
+            <label class="option">
+                <input type="radio" name="answer" value="B" />
+                <span class="dot"></span>
+                <span class="label-text">B) x = 30°</span>
+            </label>
 
+            <label class="option">
+                <input type="radio" name="answer" value="C" />
+                <span class="dot"></span>
+                <span class="label-text">C) x = 45°</span>
+            </label>
+
+            <label class="option">
+                <input type="radio" name="answer" value="D" />
+                <span class="dot"></span>
+                <span class="label-text">D) x = 60°</span>
+            </label>
+
+            <button id="checkBtn" class="btn-primary">Zkontrolovat</button>
+        </div>
+
+        <p id="napovedaText"></p>
 
     </div>
-
-
-    <style>
-        body { position: relative; }
-
-        .choices {
-            position: absolute;
-            right: 20px;
-            top: 120px;
-            z-index: 999;
-            max-width: 320px;
-        }
-
-        /* Responsive fallback for small screens */
-        @media (max-width: 640px) {
-            .choices {
-                position: static;
-                margin-top: 1rem;
-                max-width: 100%;
-            }
-        }
-
-
-        </style>
-        <script>
-        (function(){
-          function syncProgress(){
-            var label = document.getElementById('progress_num');
-            var prog = document.getElementById('myProgress');
-            if(!label || !prog) return;
-            var parts = (label.textContent || '').trim().split('/');
-            var cur = parseInt(parts[0], 10);
-            var tot = parseInt(parts[1], 10);
-            if (isNaN(cur) || isNaN(tot) || tot === 0) return;
-            prog.max = tot;
-            prog.value = Math.min(Math.max(cur, 0), tot);
-          }
-          document.addEventListener('DOMContentLoaded', syncProgress);
-          var lbl = document.getElementById('progress_num');
-          if (lbl) {
-            new MutationObserver(syncProgress).observe(lbl, { characterData: true, childList: true, subtree: true });
-          }
-        })();
-        </script>
-        <style>
-    </style>
-
-    <script src="main.js"></script>
-    <script src="napoveda.js"></script>
+</div>
+<script src="main.js"></script>
 </body>
 </html>
-

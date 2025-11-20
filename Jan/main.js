@@ -84,12 +84,9 @@ function updateQuestion(i) {
 }
 
 // --- Show completion screen ---
-// --- Show completion screen ---
 function showCompletionScreen() {
-    // Remove all body children (completely clears previous content)
     document.body.innerHTML = '';
 
-    // Create completion message
     const finishedMessage = document.createElement('div');
     finishedMessage.innerHTML = `
         <h1 style="color:#0f172a; font-weight:600; text-align:center;">🎉 Cvičení dokončeno!</h1>
@@ -106,20 +103,17 @@ function showCompletionScreen() {
     document.body.appendChild(finishedMessage);
 }
 
-// Handle restart / next-exercise buttons (delegated so they work after completion screen)
+// Delegated events
 document.addEventListener('click', (e) => {
     const id = e.target && e.target.id;
     if (id === 'restartBtn') {
         currentIndex = 0;
-        // reload to restore the original UI and state
         location.reload();
     } else if (id === 'nextExerciseBtn') {
-        // Replace with real navigation when available
-        showCustomDialog('Přejít na další cvičení...').then(() => {
-            // e.g. window.location.href = '/next-exercise.html';
-        });
+        showCustomDialog('Přejít na další cvičení...').then(() => {});
     }
 });
+
 // --- Check answer ---
 function checkAnswer() {
     const selected = document.querySelector('input[name="answer"]:checked');
@@ -144,8 +138,8 @@ function checkAnswer() {
     });
 }
 
-// --- Bind button ---
-document.getElementById('checkBtn').addEventListener('click', checkAnswer);
-
-// --- Initialize first question ---
-updateQuestion(currentIndex);
+// --- Initialize when DOM is ready ---
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+    updateQuestion(currentIndex);
+});
