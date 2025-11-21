@@ -80,3 +80,9 @@ function get_bad_subjects($marks)
 
     return $bad_subjects;
 }
+
+function get_marks_by_subject($subject, $userId)
+{
+    $marks = get_marks($userId, 9999);
+    return get_subject_marks($subject, $marks);
+}

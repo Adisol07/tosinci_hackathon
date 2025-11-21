@@ -15,6 +15,24 @@
     box-sizing: border-box;
 }
 
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--primary-color);
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
 a {
     text-decoration: none;
     color: var(--primary-foreground);
@@ -24,5 +42,9 @@ body {
     font-family: 'Nunito Sans', sans-serif;
     background-color: var(--primary-background);
     color: var(--primary-foreground);
+    padding: 2rem;
+}
+
+main {
     padding: 2rem;
 }

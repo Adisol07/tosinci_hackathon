@@ -114,7 +114,7 @@ main {
     #overview-result {
         user-select: none;
         position: relative;
-        height: 75%;
+        width: 18rem;
         display: flex;
         justify-self: flex-end;
         border-radius: 50%;
@@ -128,7 +128,7 @@ main {
                 var(--primary-color) calc(var(--percentage) * 3.6deg));
 
         h2 {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: 900;
             z-index: 1;
         }
