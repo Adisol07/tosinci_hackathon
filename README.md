@@ -9,7 +9,7 @@ Studentka IT ve 4. ročníku
 ### Tereza Šerhantová
 Studentka IT ve 4. ročníku
 
-### Adam Bestajovký
+### Adam Bestajovský
 Student IT ve 3. ročníku
 
 ### Jan Roháč
