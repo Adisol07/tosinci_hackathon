@@ -157,13 +157,49 @@ body {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
     width: 100%;
     transition: .15s ease;
 }
 
 .btn-primary:hover {
     opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Buttons row: two buttons side-by-side. Primary takes 70%, 'Nevím' takes 30% */
+.buttons-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: stretch; /* ensure children stretch to same height */
+}
+/* Keep 70/30 width split but make heights equal */
+.buttons-row .btn-primary {
+    flex: 0 0 70%;
+    width: auto;
+}
+.buttons-row .btn-nevim {
+    flex: 0 0 30%;
+}
+/* Ensure both buttons have matching padding and center text vertically */
+.buttons-row .btn-primary,
+.buttons-row .btn-nevim {
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-nevim {
+    background: #ef4444; /* red that matches project theme */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .15s ease;
+}
+.btn-nevim:hover {
+    opacity: 0.95;
     transform: translateY(-2px);
 }
 

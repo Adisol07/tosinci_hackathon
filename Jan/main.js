@@ -121,7 +121,7 @@ function showCompletionScreen() {
             Restartovat cvičení
         </button>
         <button id="nextExerciseBtn" style="display:block; margin:15px auto 0 auto; padding:10px 20px; background:#10b981; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600;">
-            Pokračovat dalším cvičením
+            Pokračovat na domovskou obrazovku
         </button>
     `;
     document.body.appendChild(finishedMessage);
@@ -134,7 +134,7 @@ document.addEventListener('click', (e) => {
         currentIndex = 0;
         location.reload();
     } else if (id === 'nextExerciseBtn') {
-        showCustomDialog('Přejít na další cvičení...').then(() => {});
+        showCustomDialog('Chcete doopravdy pokračovat na domovskou obrazovku...').then(() => {});
     }
 });
 
@@ -167,5 +167,40 @@ function checkAnswer() {
 // --- Initialize when DOM is ready ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+    const dontKnow = document.getElementById('dontKnowBtn');
+    if (dontKnow) {
+        dontKnow.addEventListener('click', () => {
+            // Show the correct answer in a modal (Czech) and then advance to next question
+            const q = questions[currentIndex];
+            if (!q) {
+                showCustomDialog('Žádná otázka není načtena.');
+                return;
+            }
+            const correctKey = (q.correct || '').toString().trim().toUpperCase();
+            let correctText = correctKey;
+            if (Array.isArray(q.options) && q.options.length > 0) {
+                // Try to find an option that starts with the key (e.g. 'A)')
+                const found = q.options.find(o => o.trim().toUpperCase().startsWith(correctKey));
+                if (found) {
+                    correctText = found;
+                } else {
+                    // Fallback: map A->0, B->1 etc.
+                    const idx = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(correctKey);
+                    if (idx >= 0 && q.options[idx]) correctText = q.options[idx];
+                }
+            }
+
+            showCustomDialog(`Správná odpověď: ${correctText}`).then(() => {
+                // Advance to next question (same behaviour as after checking)
+                currentIndex++;
+                if (currentIndex >= questions.length) {
+                    showCompletionScreen();
+                } else {
+                    updateQuestion(currentIndex);
+                    document.querySelectorAll('input[name="answer"]').forEach(r => r.checked = false);
+                }
+            });
+        });
+    }
     updateQuestion(currentIndex);
 });
