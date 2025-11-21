@@ -64,3 +64,28 @@ function is_password_correct($username, $password)
     $mysqli->close();
     return false;
 }
+
+function get_practice($id)
+{
+    $db = create_db();
+    $result = $db->query("SELECT * FROM practices WHERE id = '$id'");
+    while ($row = $result->fetch_assoc()) {
+        $practice = $row;
+    }
+    $result->free();
+    $db->close();
+    return $practice;
+}
+
+function get_practice_questions($id)
+{
+    $db = create_db();
+    $result = $db->query("SELECT * FROM practice_questions WHERE practice_id = '$id'");
+    $questions = [];
+    while ($row = $result->fetch_assoc()) {
+        $questions[] = $row;
+    }
+    $result->free();
+    $db->close();
+    return $questions;
+}
