@@ -149,7 +149,7 @@ function checkAnswer() {
     const correct = questions[currentIndex].correct;
     const feedback = (selected.value === correct)
             ? (questions[currentIndex].correctText || 'Správně! 🎉')
-            : (questions[currentIndex].incorrectText || 'Špatně. Správná odpověď: ') + correct;
+            : (questions[currentIndex].incorrectText || 'Špatně. Správná odpověď: ') + correct; //!!!!zde proppjit do DB a fetchnout oduvodneni spravne odpovedi
 
         // When correct, show centered 'Skvěle' and auto-close after 2s (OK visible immediately)
         const dialogOptions = (selected.value === correct) ? { centerText: true, autoCloseMs: 2000 } : {};
