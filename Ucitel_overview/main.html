@@ -6,6 +6,7 @@
   <title>Přehled žáků – Učitel</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">Přehled žáků</div>
@@ -17,10 +18,11 @@
 
   <div class="container">
 
-    <!-- NOVÝ OBAL -->
     <div class="top-bar">
 
-      <div class="selectors">
+      <div class="top-left">
+        <button id="addStudentBtn" class="button-practice">Přidat studenta</button>
+
         <div class="class-selector">
           <label for="classDropdown">Vyberte třídu:</label>
           <select id="classDropdown">
@@ -38,12 +40,10 @@
       </div>
 
       <div class="class-info-inline">
-        <h2>Průměr třídy: <span id="classAverage">--</span></h2>
+        Průměr třídy: <span id="classAverage">--</span>
       </div>
 
     </div>
-
-    <button id="addStudentBtn" class="button-practice">Přidat studenta</button>
 
     <table class="students-table">
       <thead>
@@ -53,8 +53,7 @@
           <th>Akce</th>
         </tr>
       </thead>
-      <tbody id="studentsList">
-      </tbody>
+      <tbody id="studentsList"></tbody>
     </table>
 
   </div>
@@ -65,7 +64,6 @@ const classes = {
   C4: { students: [], average: 0 }
 };
 
-// GENERACE STUDENTŮ
 for (const className of ["E4", "C4"]) {
   const students = [];
   for (let i = 1; i <= 10; i++) {
@@ -89,7 +87,6 @@ for (const className of ["E4", "C4"]) {
 const classDropdown = document.getElementById("classDropdown");
 const studentsList = document.getElementById("studentsList");
 const classAverage = document.getElementById("classAverage");
-const addStudentBtn = document.getElementById("addStudentBtn");
 
 function updateClassView(className) {
   const cls = classes[className];
@@ -146,10 +143,6 @@ function updateClassView(className) {
 
 updateClassView(classDropdown.value);
 classDropdown.addEventListener("change", (e) => updateClassView(e.target.value));
-
-addStudentBtn.addEventListener("click", () => {
-  console.log("Přidat studenta - zatím nic nedělá");
-});
 </script>
 
 </body>
