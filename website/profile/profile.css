@@ -32,9 +32,22 @@ main {
     }
 
     div {
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
+        div {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: center;
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
+            h3 {
+                font-size: 1.33rem;
+                font-weight: 900;
+                color: var(--quaternary-color);
+            }
         }
 
         h3 {

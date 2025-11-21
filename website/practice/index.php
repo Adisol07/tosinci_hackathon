@@ -76,6 +76,7 @@ $questions = get_practice_questions($id);
     const practicePopupText = document.getElementById('practice-popup-text');
     const practicePopupCloseBtn = document.getElementById('practice-popup-close-btn');
 
+    const practiceId = "<?php echo $id; ?>";
     let current_question = 0;
     const questions = [
         <?php foreach ($questions as $question): ?> {
@@ -156,7 +157,7 @@ $questions = get_practice_questions($id);
         showPopup();
         practicePopupCloseBtn.addEventListener('click', () => {
             practicePopup.style.display = 'none';
-            location.href = '../profile/';
+            location.href = '../api/completed_practice.php?id=' + practiceId;
         });
     }
 </script>

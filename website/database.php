@@ -128,3 +128,22 @@ function select_materials_by_owner($user_id, $original)
 
     return $materials;
 }
+
+function add_xp_from_practice($id, $user)
+{
+    $db = create_db();
+    $stmt = $db->prepare("SELECT xp FROM practices WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $stmt2 = $db->prepare("UPDATE users SET xp = xp + ? WHERE username = ?");
+        $stmt2->bind_param("is", $row['xp'], $user);
+        $stmt2->execute();
+        $stmt2->close();
+    }
+
+    $stmt->close();
+    $db->close();
+}
