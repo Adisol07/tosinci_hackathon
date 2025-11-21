@@ -38,7 +38,7 @@ $score = calculate_score($marks) / calculate_max_score(count($marks)) * 100;
     </div>
 </div>
 <div class="subject-more">
-    <a class="btn" href="<?php echo URL; ?>/practice?subject=<?php echo $subject; ?>">Procvičovat</a>
+    <a class="btn" href="<?php echo URL; ?>/practices?subject=<?php echo $subject; ?>">Procvičovat</a>
     <?php if ($score < 50): ?>
         <a class="btn" href="<?php echo URL; ?>/materials?subject=<?php echo $subject; ?>">Získat materiály</a>
     <?php else: ?>

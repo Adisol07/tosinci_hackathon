@@ -89,3 +89,16 @@ function get_practice_questions($id)
     $db->close();
     return $questions;
 }
+
+function get_practices($subject)
+{
+    $db = create_db();
+    $result = $db->query("SELECT * FROM practices WHERE subject = '$subject'");
+    $practices = [];
+    while ($row = $result->fetch_assoc()) {
+        $practices[] = $row;
+    }
+    $result->free();
+    $db->close();
+    return $practices;
+}
