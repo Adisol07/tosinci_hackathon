@@ -30,6 +30,29 @@ function get_subjects($marks)
     return $subjects;
 }
 
+function get_subjects_detailed($marks)
+{
+    $subjects = [];
+    foreach ($marks as $mark) {
+        $name = $mark['subject'];
+        $value = $mark['mark'];
+
+        if ($value < 0) {
+            $value *= -1;
+            $value += 0.5;
+        }
+        $score_contribution = 6 - $value;
+
+        if (!isset($subjects[$name])) {
+            $subjects[$name] = [$name, $score_contribution, 6];
+        } else {
+            $subjects[$name][1] += $score_contribution;
+            $subjects[$name][2] += 6;
+        }
+    }
+    return $subjects;
+}
+
 function get_subject_marks($subject, $marks)
 {
     $subject_marks = [];

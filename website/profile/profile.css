@@ -157,10 +157,18 @@ main {
     .improve-list {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: 2rem;
         width: 100%;
         justify-content: flex-start;
         align-items: center;
+
+        .show-more {
+            font-size: 1.25rem;
+            color: var(--quaternary-color);
+            font-weight: 600;
+            width: 100%;
+            padding: 1rem;
+        }
 
         .improve-item {
             display: flex;
@@ -172,19 +180,19 @@ main {
             .improve-item-value {
                 position: relative;
                 transition: --percentage 1s ease-in-out;
-                --percentage: 10;
+                --percentage: 0;
                 background: conic-gradient(var(--secondary-color) 0deg,
                         var(--secondary-color) calc(var(--percentage) * 3.6deg),
                         var(--primary-color) calc(var(--percentage) * 3.6deg));
                 border-radius: 50%;
-                width: 6rem;
+                width: 8rem;
                 aspect-ratio: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
 
                 h2 {
-                    font-size: 1.25rem;
+                    font-size: 1.5rem;
                     font-weight: 800;
                     z-index: 1;
                 }
@@ -193,22 +201,98 @@ main {
             .improve-item-value::before {
                 content: "";
                 position: absolute;
-                width: calc(100% - 2rem);
+                width: calc(100% - 3rem);
                 aspect-ratio: 1;
                 border-radius: 50%;
                 background: var(--primary-background);
             }
 
             h3 {
-                font-size: 1rem;
+                font-size: 1.25rem;
                 font-weight: 600;
+                text-wrap: nowrap;
+            }
+        }
+    }
+}
+
+.subjects {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+
+    .subjects-list {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+
+        .show-more {
+            font-size: 1.25rem;
+            color: var(--quaternary-color);
+            font-weight: 600;
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .subjects-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+
+            .subjects-item-value {
+                position: relative;
+                transition: --percentage 1s ease-in-out;
+                --percentage: 0;
+                background: conic-gradient(var(--secondary-color) 0deg,
+                        var(--secondary-color) calc(var(--percentage) * 3.6deg),
+                        var(--primary-color) calc(var(--percentage) * 3.6deg));
+                border-radius: 50%;
+                width: 8rem;
+                aspect-ratio: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                h2 {
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    z-index: 1;
+                }
+            }
+
+            .subjects-item-value::before {
+                content: "";
+                position: absolute;
+                width: calc(100% - 3rem);
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background: var(--primary-background);
+            }
+
+            h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                text-wrap: nowrap;
             }
         }
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #overview-result {
+
+    #overview-result,
+    .subjects-item-value,
+    .improve-item-value {
         transition: none;
     }
 }
