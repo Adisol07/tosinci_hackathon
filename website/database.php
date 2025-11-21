@@ -102,3 +102,29 @@ function get_practices($subject)
     $db->close();
     return $practices;
 }
+
+function get_materials($subject)
+{
+    $db = create_db();
+    $result = $db->query("SELECT * FROM materials WHERE subject = '$subject'");
+    $materials = [];
+    while ($row = $result->fetch_assoc()) {
+        $materials[] = $row;
+    }
+    $result->free();
+    $db->close();
+    return $materials;
+}
+
+function select_materials_by_owner($user_id, $original)
+{
+    $materials = [];
+
+    for ($i = 0; $i < count($original); $i++) {
+        if ($original[$i]['owner_id'] == $user_id) {
+            $materials[] = $original[$i];
+        }
+    }
+
+    return $materials;
+}
