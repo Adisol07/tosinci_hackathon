@@ -1,5 +1,10 @@
 <?php include_once('../header.php'); ?>
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login/');
+}
+
 $subject = filter_input(INPUT_GET, 'subject', FILTER_SANITIZE_STRING) ?? '';
 if ($subject == '') {
     header('Location: ../profile/');
