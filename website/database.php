@@ -50,3 +50,17 @@ function get_mark_count($user_id)
     $db->close();
     return $total_count;
 }
+
+function is_password_correct($username, $password)
+{
+    $mysqli = create_db();
+    $result = $mysqli->query("SELECT * FROM users WHERE username = '$username'");
+    while ($row = $result->fetch_assoc()) {
+        if (password_verify($password, $row['password'])) {
+            return true;
+        }
+    }
+    $result->free();
+    $mysqli->close();
+    return false;
+}
