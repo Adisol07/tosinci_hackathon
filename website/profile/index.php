@@ -18,7 +18,7 @@ $score = calculate_score(get_marks($user['id'], 9999)) / calculate_max_score(get
     <img src="<?php echo URL; ?>/content/profile_pictures/<?php echo $user['id']; ?>.jpg" alt="<?php echo $username . " profile picture"; ?>">
     <div>
         <div>
-            <h2><?php echo $username; ?></h2>
+            <h2><?php echo $user['name']; ?></h2>
             <h3><?php echo $user['xp']; ?> XP</h3>
         </div>
         <h3>Zůstatek: <?php echo $user['balance']; ?></h3>

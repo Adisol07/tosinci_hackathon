@@ -18,7 +18,7 @@ $score = calculate_score($marks) / calculate_max_score(count($marks)) * 100;
 
 <link rel="stylesheet" href="./subject.css">
 
-<h2 style="<?php echo ($score < 50 ? 'color:red;' : ''); ?>"><?php echo $subject; ?></h2>
+<h2><?php echo $subject; ?></h2>
 <div class="subject-grid">
     <div class="marks-list">
         <?php foreach ($marks as $mark): ?>
