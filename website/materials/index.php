@@ -19,6 +19,17 @@ $materials = get_materials($subject);
 
 <link rel="stylesheet" href="./materials.css">
 
+<div id="buy-popup">
+    <div>
+        <h2 id="buy-popup-title"></h2>
+        <p id="buy-popup-text"></p>
+        <div>
+            <button class="btn" id="cancel-popup-btn">Zrušit</button>
+            <button class="btn" id="buy-popup-btn">Zakoupit</button>
+        </div>
+    </div>
+</div>
+
 <h2>Materiály <?php echo $subject; ?></h2>
 <?php if ($score < 50): ?>
 
@@ -27,7 +38,7 @@ $materials = get_materials($subject);
     <h3>Objevit materiály</h3>
     <div class="materials-list">
         <?php foreach ($materials as $material): ?>
-            <a class="materials-item" href="<?php echo URL; ?>/material?id=<?php echo htmlspecialchars($material['id']); ?>">
+            <a class="materials-item buyable-materials-item" href="#" data-price="<?php echo $material['price']; ?>">
                 <h3><?php echo $material['name']; ?></h3>
             </a>
         <?php endforeach; ?>
@@ -48,5 +59,30 @@ $materials = get_materials($subject);
     <a class="btn" href="<?php echo URL; ?>/upload_material?subject=<?php echo $subject; ?>">Nahrát materiály</a>
 
 <?php endif; ?>
+
+<script>
+    const buyPopup = document.getElementById('buy-popup');
+    const buyPopupTitle = document.getElementById('buy-popup-title');
+    const buyPopupText = document.getElementById('buy-popup-text');
+    const buyPopupBtn = document.getElementById('buy-popup-btn');
+    const cancelPopupBtn = document.getElementById('cancel-popup-btn');
+
+    const buyableMaterialsItems = document.querySelectorAll('.buyable-materials-item');
+    for (const item of buyableMaterialsItems) {
+        item.addEventListener('click', () => {
+            buyPopupTitle.innerText = item.querySelector('h3').innerText;
+            buyPopupText.innerText = 'Cena: ' + item.getAttribute('data-price');
+            buyPopup.style.display = 'flex';
+        });
+    }
+
+    buyPopupBtn.addEventListener('click', () => {
+        buyPopup.style.display = 'none';
+    });
+
+    cancelPopupBtn.addEventListener('click', () => {
+        buyPopup.style.display = 'none';
+    });
+</script>
 
 <?php include_once('../footer.php'); ?>

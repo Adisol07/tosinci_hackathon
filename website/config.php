@@ -1,3 +1,3 @@
 <?php
-define('URL', 'https://localhost/TosinciHackathon/');
-define('NAME', 'Tosínci');
+define('URL', 'http://localhost/TosinciHackathon/');
+define('NAME', 'Známkovník');
