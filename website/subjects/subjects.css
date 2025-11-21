@@ -1,0 +1,85 @@
+@property --percentage {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+body {
+    width: 100vw;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    width: 100%;
+    text-align: center;
+}
+
+.subjects-list {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: wrap;
+
+    .subjects-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
+
+        .subjects-item-value {
+            position: relative;
+            transition: --percentage 1s ease-in-out;
+            --percentage: 0;
+            background: conic-gradient(var(--secondary-color) 0deg,
+                    var(--secondary-color) calc(var(--percentage) * 3.6deg),
+                    var(--primary-color) calc(var(--percentage) * 3.6deg));
+            border-radius: 50%;
+            width: 8rem;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h2 {
+                font-size: 1.5rem;
+                font-weight: 800;
+                z-index: 1;
+            }
+        }
+
+        .subjects-item-value::before {
+            content: "";
+            position: absolute;
+            width: calc(100% - 3rem);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--primary-background);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-wrap: nowrap;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .subjects-item-value {
+        transition: none;
+    }
+}
