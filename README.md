@@ -1,7 +1,7 @@
 # Tosínci
 Střední průmyslová škola Emila Kolbena v Rakovníku, Středočeský kraj
 
-# Popis projektu
+# Popis projektu Známkovník
 - Vylepšený vzdělávací systém -> ulehčení studentům vzdělávání a možnost si přivydělat
 - Spolupráce s jinými platformami (Bakaláři, Škola online)
 - Možnost zadávat přípravné testy/výukové materiály -> se schválením učitele
@@ -9,6 +9,7 @@ Střední průmyslová škola Emila Kolbena v Rakovníku, Středočeský kraj
 
 ## Informace o struktuře
 Samotný kód webové stránky se nachází v adresáři [website](https://github.com/Adisol07/tosinci_hackathon/tree/main/website) (veškeré další adresáře jsou vývojové.)
+
 Webová stránka nelze spustit jelikož vyžaduje přítomnost souboru __credentials.php__, který je ale vynechán z gitu.
 
 ## Členové týmu
